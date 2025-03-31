@@ -1,0 +1,21 @@
+{
+	"name": "earthtomemphisblog",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "tsx watch src/server.ts",
+		"build": "tsc && node dist/server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"dependencies": {
+		"tsx": "^4.19.3"
+	},
+	"devDependencies": {
+		"@tsconfig/node23": "^23.0.1",
+		"@types/node": "^22.13.14",
+		"typescript": "^5.8.2"
+	}
+}
