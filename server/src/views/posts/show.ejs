@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Show <%= post.title %></title>
-	</head>
-	<body>
-		<article>
-			<h1><%= post.title %></h1>
-			<p><%= post.body %></p>
-		</article>
-		<a href="/posts">Back to index</a>
-	</body>
-</html>
+<% layout('layouts/boilerplate') %>
+<div class="row">
+	<div class="col-6 offset-3 mb-3">
+		<div class="card mb-3">
+			<article class="card-body">
+				<h1 class="card-title"><%= post.title %></h1>
+				<p class="card-text"><%= post.body %></p>
+			</article>
+		</div>
+	</div>
+	<a href="/posts">Back to index</a>
+</div>

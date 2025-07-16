@@ -2,6 +2,9 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import { v4 as uuid } from 'uuid';
+import mongoose from 'mongoose';
+// @ts-ignore
+import ejsMate from 'ejs-mate';
 
 async function start() {
 	dotenv.config();
@@ -9,10 +12,19 @@ async function start() {
 
 	const app: Express = express();
 
-	app.use(express.urlencoded({ extended: true }));
-	app.use(express.json());
+	app.engine('ejs', ejsMate);
 	app.set('view engine', 'ejs');
 	app.set('views', path.join(__dirname, '/views'));
+	app.use(express.urlencoded({ extended: true }));
+	app.use(express.json());
+
+	// mongoose.connect('mongodb://127.0.0.1:27017/earthtomemphis');
+
+	// const db = mongoose.connection;
+	// db.on('error', console.error.bind(console, 'connection error:'));
+	// db.once('open', () => {
+	// 	console.log('Database connected');
+	// });
 
 	const posts = [
 		{
@@ -33,7 +45,17 @@ async function start() {
 	];
 
 	app.get('/', (req: Request, res: Response) => {
-		res.render('home', { posts });
+		res.render('home');
+	});
+
+	app.get('/posts/new', (req: Request, res: Response) => {
+		res.render('posts/new');
+	});
+
+	app.post('/posts', (req: Request, res: Response) => {
+		const { title, body } = req.body;
+		posts.push({ title, body, id: uuid() });
+		res.redirect('/posts');
 	});
 
 	app.get('/posts', (req: Request, res: Response) => {

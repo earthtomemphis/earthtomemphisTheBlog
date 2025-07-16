@@ -1,0 +1,32 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+	<h1 class="text-center">Create a New Blog Post</h1>
+	<div class="col-6 offset-3">
+		<form action="/posts" method="post">
+			<div class="mb-3">
+				<label class="form-label" for="title">Enter a Title</label>
+				<input
+					type="text"
+					class="form-control"
+					name="post[title]"
+					id="title"
+					placeholder="title"
+				/>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="body">Enter a Body</label>
+				<textarea
+					type="text"
+					class="form-control"
+					name="post[body]"
+					id="body"
+					placeholder="body"
+				></textarea>
+			</div>
+			<div class="mb-3">
+				<button class="btn btn-success">Add Post</button>
+			</div>
+		</form>
+		<a href="/posts">Back to Index</a>
+	</div>
+</div>
