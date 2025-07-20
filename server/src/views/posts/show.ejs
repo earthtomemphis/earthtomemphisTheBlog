@@ -7,6 +7,18 @@
 				<p class="card-text"><%= post.body %></p>
 			</article>
 		</div>
+		<div class="card-body">
+			<a href="/posts/<%= post.id %>/edit" class="card-link btn btn-info">
+				Edit
+			</a>
+			<form
+				class="d-inline"
+				action="/posts/<%= post._id %>?_method=DELETE"
+				method="POST"
+			>
+				<button class="btn btn-danger">Delete</button>
+			</form>
+		</div>
 	</div>
 	<a href="/posts">Back to index</a>
 </div>
