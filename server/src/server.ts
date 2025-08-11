@@ -1,12 +1,17 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, NextFunction, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
-import { v4 as uuid } from 'uuid';
 import mongoose from 'mongoose';
 // @ts-ignore
 import ejsMate from 'ejs-mate';
 import methodOverride from 'method-override';
 import Post from './models/post';
+import YouTube from './models/youtube';
+import posts from './routes/posts';
+import youtube from './routes/youtube';
+import ExpressError from './utils/ExpressError';
+import catchAsync from './utils/catchAsync';
+import { postSchema } from './utils/errorSchema';
 
 async function start() {
 	dotenv.config();
@@ -29,64 +34,31 @@ async function start() {
 		console.log('Database connected');
 	});
 
-	const posts = [
-		{
-			id: uuid(),
-			title: 'Post 1',
-			body: ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium corporis fuga sunt. Explicabo tempore saepe beatae nulla non necessitatibus molestiae obcaecati, optio quis aspernatur exercitationem quos assumenda, incidunt ut soluta!',
-		},
-		{
-			id: uuid(),
-			title: 'Post 2',
-			body: ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium corporis fuga sunt. Explicabo tempore saepe beatae nulla non necessitatibus molestiae obcaecati, optio quis aspernatur exercitationem quos assumenda, incidunt ut soluta!',
-		},
-		{
-			id: uuid(),
-			title: 'Post 3',
-			body: ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium corporis fuga sunt. Explicabo tempore saepe beatae nulla non necessitatibus molestiae obcaecati, optio quis aspernatur exercitationem quos assumenda, incidunt ut soluta!',
-		},
-	];
-
-	app.get('/', (req: Request, res: Response) => {
-		res.render('home');
-	});
-
-	app.get('/posts', async (req: Request, res: Response) => {
+	app.get('/', async (req: Request, res: Response) => {
 		const posts = await Post.find({});
-		res.render('posts/index', { posts });
+		const youtubeLinks = await YouTube.find({});
+		res.render('home', { posts, youtubeLinks });
 	});
 
-	app.get('/posts/new', (req: Request, res: Response) => {
-		res.render('posts/new');
+	app.use('/posts', posts);
+	app.use('/youtube', youtube);
+
+	app.all(/(.*)/, (req: Request, res: Response, next: NextFunction) => {
+		next(new ExpressError('Page Not Found', 404));
 	});
 
-	app.post('/posts', async (req: Request, res: Response) => {
-		const post = new Post(req.body.post);
-		await post.save();
-		res.redirect(`/posts/${post._id}`);
-	});
-
-	app.get('/posts/:id', async (req: Request, res: Response) => {
-		const post = await Post.findById(req.params.id);
-		res.render('posts/show', { post });
-	});
-
-	app.get('/posts/:id/edit', async (req: Request, res: Response) => {
-		const post = await Post.findById(req.params.id);
-		res.render('posts/edit', { post });
-	});
-
-	app.patch('/posts/:id', async (req: Request, res: Response) => {
-		const { id } = req.params;
-		const post = await Post.findByIdAndUpdate(id, { ...req.body.post });
-		res.redirect(`/posts/${post?._id}`);
-	});
-
-	app.delete('/posts/:id', async (req: Request, res: Response) => {
-		const { id } = req.params;
-		const post = await Post.findByIdAndDelete(id);
-		res.redirect('/posts');
-	});
+	app.use(
+		(
+			err: ExpressError,
+			req: Request,
+			res: Response,
+			next: NextFunction
+		) => {
+			const { statusCode = 500 } = err;
+			if (!err.message) err.message = 'Oh No, Something went wrong';
+			res.status(statusCode).render('error', { err });
+		}
+	);
 
 	app.listen(port, () => {
 		console.log(`Server is running at http://localhost:${port}`);

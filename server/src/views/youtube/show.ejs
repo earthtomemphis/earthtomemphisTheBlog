@@ -1,0 +1,29 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+	<div class="col-6 offset-3 mb-3">
+		<div class="card mb-3">
+			<h1><%= youtubeLink.url %></h1>
+			<p><%= youtubeLink.description %></p>
+			<div class="card-body">
+				<!-- <video src="<%= youtubeLink.url %>"></video> -->
+			</div>
+		</div>
+
+		<div class="card-body">
+			<a
+				href="/youtube/<%= youtubeLink._id %>/edit"
+				class="card-link btn btn-info"
+				>Edit</a
+			>
+            <form
+				class="d-inline"
+				action="/youtube/<%= youtubeLink._id %>?_method=DELETE"
+				method="POST"
+			>
+				<button class="btn btn-danger">Delete</button>
+			</form>
+		</div>
+		</div>
+		<a href="/youtube">All Videos</a>
+	</div>
+</div>

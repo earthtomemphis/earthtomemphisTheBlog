@@ -1,23 +1,25 @@
 <% layout('layouts/boilerplate') %>
-<h1>Blog Posts</h1>
-<div class="mb-3">
-	<a href="/posts/new">Add Post</a>
-</div>
-<% for(let post of posts){ %>
-<div class="card mb-3">
-	<div class="row">
-		<div class="col-md-4">
-			<!-- image -->
-		</div>
-		<div class="col-md-8">
-			<div class="card-body">
-				<h5 class="card-title"><%= post.title %></h5>
-				<p class="card-text"><%= post.body %></p>
-				<a href="/posts/<%= post.id %>" class="btn btn-primary"
-					>View Post</a
-				>
+<div class="row">
+	<h1>Blog Posts</h1>
+	<div class="mb-3">
+		<a href="/posts/new">Add Post</a>
+	</div>
+	<% for(let post of posts){ %>
+	<div class="card mb-3 col-9">
+		<div class="row">
+			<div class="col-md-4">
+				<!-- image -->
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title"><%= post.title %></h5>
+					<p class="card-text"><%= post.body %></p>
+					<a href="/posts/<%= post.id %>" class="btn btn-primary"
+						>View Post</a
+					>
+				</div>
 			</div>
 		</div>
 	</div>
+	<% } %>
 </div>
-<% } %>

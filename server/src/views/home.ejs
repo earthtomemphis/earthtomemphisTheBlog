@@ -1,31 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Home</title>
-	</head>
-	<body>
-		<h1>earthtomemphis</h1>
-		<section>
-			<h1>Blog Posts</h1>
-			<ul>
-				<% for(let post of posts){ %>
-				<li>
-					<h2><%= post.title %></h2>
-					<p><%= post.body %></p>
-				</li>
-				<% } %>
-			</ul>
-		</section>
-		<section>
-			<form action="/newsletter">
-				<label for="name">First Name</label>
-				<input type="text" name="name" id="name" />
-				<label for="email">email</label>
-				<input type="email" name="email" id="email" />
-				<button>Sign Me Up!</button>
-			</form>
-		</section>
-	</body>
-</html>
+<% layout('layouts/boilerplate') %>
+<section>
+	<ul>
+		<% for(let youtubeLink of youtubeLinks){ %>
+		<a href="/youtube/<%= youtubeLink._id %>"><%= youtubeLink.url %></a>
+		<p><%= youtubeLink.description %></p>
+		<% } %>
+	</ul>
+</section>
+<section>
+	<h1>Blog Posts</h1>
+	<ul>
+		<% for(let post of posts){ %>
+		<li>
+			<h2><%= post.title %></h2>
+			<p><%= post.body %></p>
+		</li>
+		<% } %>
+	</ul>
+</section>
+<section>
+	<form action="/newsletter">
+		<label for="name">First Name</label>
+		<input type="text" name="name" id="name" />
+		<label for="email">email</label>
+		<input type="email" name="email" id="email" />
+		<button>Sign Me Up!</button>
+	</form>
+</section>
