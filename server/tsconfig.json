@@ -4,6 +4,6 @@
 		"outDir": "dist",
 		"sourceMap": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "src/routes/posts.ts"],
 	"exclude": ["node_modules"]
 }
