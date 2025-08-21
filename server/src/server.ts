@@ -18,6 +18,7 @@ import users from './routes/users';
 import ExpressError from './utils/ExpressError';
 import catchAsync from './utils/catchAsync';
 import { postSchema } from './utils/errorSchema';
+import { requireLogin } from './utils/middleware';
 
 declare module 'express-session' {
 	interface SessionData {
@@ -75,13 +76,7 @@ async function start() {
 		next();
 	});
 
-	const requireLogin = (req: Request, res: Response, next: NextFunction) => {
-		if (!req.isAuthenticated()) {
-			req.flash('error', 'You must be signed in first!');
-			return res.redirect('/auth/login');
-		}
-		next();
-	};
+	// require login
 
 	app.get('/', async (req: Request, res: Response) => {
 		const posts = await Post.find({});

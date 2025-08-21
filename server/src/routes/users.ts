@@ -1,6 +1,7 @@
 import express, { NextFunction, Request, Response } from 'express';
 import User from '../models/user';
 import passport from 'passport';
+import { storeReturnTo } from '../utils/middleware';
 
 const router = express.Router();
 
@@ -35,13 +36,15 @@ router.get('/login', (req: Request, res: Response) => {
 
 router.post(
 	'/login',
+	storeReturnTo,
 	passport.authenticate('local', {
 		failureFlash: true,
 		failureRedirect: '/auth/login',
 	}),
 	(req: Request, res: Response) => {
 		req.flash('success', 'Welcome back!');
-		res.redirect('/');
+		const redirectUrl = res.locals.returnTo || '/';
+		res.redirect(redirectUrl);
 	}
 );
 
