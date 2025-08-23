@@ -1,5 +1,13 @@
 import express, { NextFunction, Request, Response } from 'express';
-import Post from '../models/post';
+import {
+	createPost,
+	deletePost,
+	editPost,
+	postIndex,
+	renderEditPostForm,
+	renderNewPostForm,
+	showPost,
+} from '../controllers/posts';
 import { postSchema } from '../utils/errorSchema';
 import ExpressError from '../utils/ExpressError';
 
@@ -13,41 +21,14 @@ const validatePost = (req: Request, res: Response, next: NextFunction) => {
 	} else next();
 };
 
-router.get('/', async (req: Request, res: Response) => {
-	const posts = await Post.find({});
-	res.render('posts/index', { posts });
-});
+router.route('/').get(postIndex).post(validatePost, createPost);
 
-router.get('/new', (req: Request, res: Response) => {
-	res.render('posts/new');
-});
+router.get('/new', renderNewPostForm);
 
-router.post('/', validatePost, async (req: Request, res: Response) => {
-	const post = new Post(req.body.post);
-	await post.save();
-	res.redirect(`/posts/${post._id}`);
-});
+router.get('/:id', showPost);
 
-router.get('/:id', async (req: Request, res: Response) => {
-	const post = await Post.findById(req.params.id);
-	res.render('posts/show', { post });
-});
+router.get('/:id/edit', renderEditPostForm);
 
-router.get('/:id/edit', async (req: Request, res: Response) => {
-	const post = await Post.findById(req.params.id);
-	res.render('posts/edit', { post });
-});
-
-router.patch('/:id', async (req: Request, res: Response) => {
-	const { id } = req.params;
-	const post = await Post.findByIdAndUpdate(id, { ...req.body.post });
-	res.redirect(`/posts/${post?._id}`);
-});
-
-router.delete('/:id', async (req: Request, res: Response) => {
-	const { id } = req.params;
-	const post = await Post.findByIdAndDelete(id);
-	res.redirect('/posts');
-});
+router.route('/:id').patch(editPost).delete(deletePost);
 
 export default router;
