@@ -78,10 +78,13 @@ async function start() {
 
 	// require login
 
-	app.get('/', async (req: Request, res: Response) => {
-		const posts = await Post.find({});
-		const youtubeLinks = await YouTube.find({});
-		res.render('home', { posts, youtubeLinks });
+	app.get('/api/message', async (req: Request, res: Response) => {
+		// const posts = await Post.find({});
+		// const youtubeLinks = await YouTube.find({});
+		// res.render('home', { posts, youtubeLinks });
+		res.json({
+			msg: 'Hello from the server',
+		});
 	});
 
 	app.use('/posts', posts);
