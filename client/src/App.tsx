@@ -19,7 +19,7 @@ function App() {
 
 	return (
 		<div>
-			<h1>Hello from client</h1>
+			<h1 className="bg-amber-800">Hello from client</h1>
 			<p>{message}</p>
 		</div>
 	);
