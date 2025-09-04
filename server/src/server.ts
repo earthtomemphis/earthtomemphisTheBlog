@@ -87,9 +87,9 @@ async function start() {
 		});
 	});
 
-	app.use('/posts', posts);
-	app.use('/youtube', youtube);
-	app.use('/auth', users);
+	app.use('/api/posts', posts);
+	app.use('/api/youtube', youtube);
+	app.use('/api/auth', users);
 
 	app.get('/secret', requireLogin, (req: Request, res: Response) => {
 		res.render('secret');
