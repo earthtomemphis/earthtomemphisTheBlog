@@ -3,7 +3,10 @@ import YouTube from '../models/youtube';
 
 export const youtubeIndex = async (req: Request, res: Response) => {
 	const youtubeLinks = await YouTube.find({});
-	res.render('youtube/index', { youtubeLinks });
+	// console.log(youtubeLinks);
+	res.json({
+		youtubeLinks,
+	});
 };
 
 export const renderNewYouTubeForm = (req: Request, res: Response) => {

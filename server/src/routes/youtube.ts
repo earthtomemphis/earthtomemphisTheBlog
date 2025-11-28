@@ -1,5 +1,4 @@
-import express, { Request, Response } from 'express';
-import YouTube from '../models/youtube';
+import express from 'express';
 import {
 	createYoutubeVideo,
 	deleteYoutubeVideo,

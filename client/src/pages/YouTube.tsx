@@ -1,6 +1,29 @@
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+
 const YouTube = () => {
+	// const [youtubeLinks, setYoutubeLinks] = useState([]);
+
+	// useEffect(() => {
+	// 	const getYoutubeLink = async () => {
+	// 		try {
+	// 			const res = await axios.get('/api/youtube');
+	// 			setYoutubeLinks(res.data);
+	// 		} catch (err) {
+	// 			console.log(err);
+	// 		}
+	// 	};
+	// 	getYoutubeLink();
+	// }, []);
+	// console.log(youtubeLinks);
+
 	return (
 		<section className="space-y-6 flex-grow">
+			{/* {youtubeLinks.map((link) => (
+				<div key={link}>
+					<p>{link.url}</p>
+				</div>
+			))} */}
 			<h2 className="mb-4 text-2xl text-center font-semibold text-lime-700">
 				My YouTube Videos
 			</h2>

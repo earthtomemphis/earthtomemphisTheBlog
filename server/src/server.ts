@@ -5,19 +5,16 @@ import mongoose from 'mongoose';
 // @ts-ignore
 import ejsMate from 'ejs-mate';
 import methodOverride from 'method-override';
+import cors from 'cors';
 import flash from 'connect-flash';
 import session from 'express-session';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import Post from './models/post';
-import YouTube from './models/youtube';
 import User from './models/user';
 import posts from './routes/posts';
 import youtube from './routes/youtube';
 import users from './routes/users';
 import ExpressError from './utils/ExpressError';
-import catchAsync from './utils/catchAsync';
-import { postSchema } from './utils/errorSchema';
 import { requireLogin } from './utils/middleware';
 
 declare module 'express-session' {
@@ -47,6 +44,11 @@ async function start() {
 	app.use(express.urlencoded({ extended: true }));
 	app.use(express.json());
 	app.use(methodOverride('_method'));
+	app.use(
+		cors({
+			origin: 'http://localhost:5173',
+		})
+	);
 
 	const sessionConfig = {
 		secret: 'thisshouldbeabettersecret!',
