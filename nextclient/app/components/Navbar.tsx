@@ -1,4 +1,5 @@
 'use client';
+import { SignedOut, SignedIn, UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -41,11 +42,16 @@ const Navbar = () => {
 				<Link href="#">Trending</Link>
 				<Link href="#">Most Popular</Link>
 				<Link href="#">About</Link>
-				<Link href="login">
-					<button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
-						Login 👋
-					</button>
-				</Link>
+				<SignedOut>
+					<Link href="/login">
+						<button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
+							Login 👋
+						</button>
+					</Link>
+				</SignedOut>
+				<SignedIn>
+					<UserButton />
+				</SignedIn>
 			</div>
 		</div>
 	);
