@@ -44,7 +44,7 @@ const Navbar = () => {
 				<Link href="#">About</Link>
 				<SignedOut>
 					<Link href="/login">
-						<button className="py-2 px-4 rounded-3xl bg-blue-800 text-white">
+						<button className="py-2 px-4 rounded-3xl bg-blue-800 text-white shadow-xl">
 							Login 👋
 						</button>
 					</Link>
