@@ -11,15 +11,7 @@ import {
 import FeaturedPosts from './components/FeaturedPosts';
 import { GiEarthAsiaOceania } from 'react-icons/gi';
 import PostList from './components/PostList';
-import {
-	Pagination,
-	PaginationContent,
-	PaginationEllipsis,
-	PaginationItem,
-	PaginationLink,
-	PaginationNext,
-	PaginationPrevious,
-} from '@/components/ui/pagination';
+import PaginationComp from './components/PaginationComp';
 
 const Home = () => {
 	return (
@@ -98,31 +90,7 @@ const Home = () => {
 			{/* POST LIST */}
 			<h1 className="my-8 text-2xl text-gray-600">Recent Posts</h1>
 			<PostList />
-			<Pagination className="mb-8">
-				<PaginationContent>
-					<PaginationItem>
-						<PaginationPrevious href="#" />
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">1</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">2</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">3</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationLink href="#">4</PaginationLink>
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationEllipsis />
-					</PaginationItem>
-					<PaginationItem>
-						<PaginationNext href="#" />
-					</PaginationItem>
-				</PaginationContent>
-			</Pagination>
+			<PaginationComp />
 		</div>
 	);
 };
