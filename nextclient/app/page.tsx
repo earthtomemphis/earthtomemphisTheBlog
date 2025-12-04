@@ -26,9 +26,11 @@ const Home = () => {
 					</BreadcrumbItem>
 					<BreadcrumbSeparator />
 					<BreadcrumbItem>
-						<BreadcrumbPage className="text-blue-800">
-							Blog and Articles
-						</BreadcrumbPage>
+						<Link href="/posts/list">
+							<BreadcrumbPage className="text-blue-800">
+								Blog and Articles
+							</BreadcrumbPage>
+						</Link>
 					</BreadcrumbItem>
 				</BreadcrumbList>
 			</Breadcrumb>
