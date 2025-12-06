@@ -15,7 +15,7 @@ const PostListItem = () => {
 				/>
 			</div>
 			{/* details */}
-			<div className="flex flex-1 w-max flex-col gap-2 mt-2 md:w-1/2 xl:w-2/3">
+			<div className="flex  flex-col gap-2 mt-2 md:w-1/2 xl:w-2/3">
 				<Link href="/test" className="text-2xl font-semibold">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 				</Link>
