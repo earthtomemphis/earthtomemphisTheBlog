@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import postImg from '../../../public/postImg.jpeg';
+import userImg from '../../../public/userImg.jpeg';
+import facebook from '../../../public/facebook.svg';
+import instagram from '../../../public/instagram.svg';
+import Search from '@/app/components/Search';
+import Comments from '@/app/components/Comments';
+import PostMenuActions from '@/app/components/PostMenuActions';
 
 const SinglePostPage = () => {
 	return (
@@ -119,7 +125,61 @@ const SinglePostPage = () => {
 						voluptatibus.
 					</p>
 				</div>
+				{/* menu */}
+				<div className="px-4 h-max sticky top-8">
+					<h1 className="mb-4 text-sm font-medium">Author</h1>
+					<div className="flex flex-col gap-4">
+						<div className="flex items-center gap-8">
+							<Image
+								src={userImg}
+								alt=""
+								className="w-12 h-12 rounded-full object-cover"
+								width={48}
+								height={48}
+							/>
+							<Link href="" className="text-blue-800">
+								Memphis
+							</Link>
+						</div>
+						<p className="text-sm text-gray-500">
+							Lorem ipsum dolor sit amet consectetur.
+						</p>
+						<div className="flex gap-2">
+							<Link href="#">
+								<Image src={facebook} alt="" />
+							</Link>
+							<Link href="#">
+								<Image src={instagram} alt="" />
+							</Link>
+						</div>
+					</div>
+					{/* todo */}
+					<PostMenuActions />
+					<h1 className="mt-8 mb-4 text-sm font-medium">
+						Categories
+					</h1>
+					<div className="flex flex-col gap-2 text-sm">
+						<Link href="#" className="underline">
+							All
+						</Link>
+						<Link href="#" className="underline">
+							Travel Tips
+						</Link>
+						<Link href="#" className="underline">
+							Travel Stories
+						</Link>
+						<Link href="#" className="underline">
+							Budget Traveling
+						</Link>
+						<Link href="#" className="underline">
+							Points & Rewards
+						</Link>
+					</div>
+					<h1 className="mt-8 mb-4 text-sm font-medium">Search</h1>
+					<Search />
+				</div>
 			</div>
+			<Comments />
 		</div>
 	);
 };
